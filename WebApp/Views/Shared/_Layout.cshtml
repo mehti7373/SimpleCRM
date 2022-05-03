@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en" class=" js no-touch">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.rtl.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="~/site/css/animate.css">
+    <link rel="stylesheet" href="~/site/css/style.css">
+</head>
+<body>
+
+    <div class="main-navbar navbar-fixed-top">
+
+        <div class="navbar navbar-default">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand"><img src="~/site/img/HeaderLogo-K.jpg" class="img-responsive" width="60" height="15"> </a>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active nav-menu"><a href="#banner">خانه </a></li>
+                    <li class="nav-menu"><a asp-action="index" asp-controller="tickets">تیکت</a></li>
+                </ul>
+                <ul class="nav navbar-nav pull-left">
+
+                    @if (IsAuthenticated())
+                    {
+                        <li class="nav-menu"><a href="#">@(UserName())</a></li>
+                        @if (UserIsAdmin())
+                        {
+                            <li class="nav-menu">
+                                <a asp-action="Index" asp-controller="Home" asp-area="Admin">مدیریت</a>
+                            </li>
+                        }
+                        @if (UserIsSupporter())
+                        {
+                            <li class="nav-menu">
+                                <a asp-action="Index" asp-controller="Home" asp-area="Tickets">پاسخگویی تیکت</a>
+                            </li>
+                        }
+
+                        <li class="nav-menu"><a href="/account/logout">خروج</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-menu"><a href="/account/login">ورود</a></li>
+                        <li class="nav-menu"><a href="/account/register">عضویت</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+
+    <!---form contact ---->
+
+    @*<div id="contact">
+        <div class="container wow bounceInLeft" data-duration="2s" data-dely="1s">
+            <div class="row">
+                <div class="page-title text-center">
+                    <h1>ارتباط با ما</h1>
+                    <p>متن  توضیحات</p>
+                    <hr class="line-bottom" />
+                </div>
+                <div class="form-sec">
+                    <form action="#" method="post" class="contactfrom">
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control text-field-box " placeholder="نام">
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control text-field-box " placeholder="ایمیل">
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control text-field-box " placeholder="اموضوع">
+                        </div>
+
+                        <div class="col-sm-12 form-group">
+                            <textarea class="form-control text-field-box" placeholder="متن چیام"></textarea>
+                        </div>
+                        <button class="button-medium" type="submit">ارسال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    <!----footer--->
+    <div class="footer">
+        <div class="container">
+            <div class="row text-center">
+                <h3>صفحات ما را در شبکه های اجتماعی دنبال کنید</h3>
+
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook"></i> </a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i> </a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i> </a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i> </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!--libs-->
+<script src="~/lib/js/jquery-2.1.1.js"></script>
+<script src="~/lib/js/jquery.validate.js"></script>
+<script src="~/lib/js/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/bootstrap/bootstrap.min.js"></script>
+
+<!--page-->
+<script src="~/site/js/jquery.min.js"></script>
+<script src="~/site/js/jquery.mixitup.js"></script>
+
+@*<script src="~/site/js/jquery.easing.min.js"></script>*@
+<script src="~/site/js/wow.js"></script>
+<script>
+    $(document).ready(function () {
+
+        new WOW().init();
+    });
+</script>
+<script src="~/site/js/custom.js"></script>
+@RenderSection("scripts", false)

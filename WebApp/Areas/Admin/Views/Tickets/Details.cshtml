@@ -1,0 +1,35 @@
+﻿@model WebApp.Areas.Admin.Models.TicketDetailsViewModel
+
+@{
+    ViewData["Title"] = "مشاهده تیکت";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="box">
+    <h3>@ViewBag.Title</h3>
+
+
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">@Model.Title</div>
+        <div class="panel-body">
+            دسنه : @Model.CategoryTitle
+            @foreach (var msg in Model.TicketMessages)
+            {
+                <hr />
+                <br />
+                <span>@msg.CreateAt.ToPersianDateString(includeHourMinute: true) </span>
+                <div>@msg.Message</div>
+                @if (!string.IsNullOrEmpty(msg.File))
+                {
+                    <br />
+                    <a href="/@msg.File">فایل</a>
+                }
+            }
+        </div>
+        <div class="panel-footer">@Model.CreateAt.ToPersianDateString(includeHourMinute: true)</div>
+    </div>
+
+    @await Html.PartialAsync("Reply", new WebApp.Areas.Admin.Models.TicketReplyViewModel { Id = Model.Id })
+
+</div>

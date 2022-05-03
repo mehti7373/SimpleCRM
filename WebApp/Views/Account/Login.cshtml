@@ -1,0 +1,42 @@
+﻿@model WebApp.Models.LoginViewModel
+
+
+@{
+    ViewData["Title"] = "ورود";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+
+<form class="form-signin" asp-action="Login" asp-route-ReturnUrl="@ViewData["ReturnUrl"]">
+    <h2 class="form-signin-heading">ورود به مدیریت مشتریان</h2>
+
+    <div class="login-wrap">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" autofocus />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox ">
+                <label>
+                    <input asp-for="RemmemberMe" />@Html.DisplayNameFor(model => model.RemmemberMe)
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="ورود" class=" btn btn-lg btn-login btn-block" />
+        </div>
+
+        <p><a asp-action="#"><small>رمزتان را فراموش کرده اید؟</small></a></p>
+        <p class="text-muted text-center">
+            <a asp-action="register" class="btn btn-sm btn-white btn-block">ایجاد حساب کاربری</a>
+        </p>
+    </div>
+</form>

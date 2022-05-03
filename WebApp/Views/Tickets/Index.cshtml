@@ -1,0 +1,37 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebApp.Models.TicketIndexViewModel>
+@using ReflectionIT.Mvc.Paging
+@using WebApp.Utility.Extensions
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@{
+    ViewData["Title"] = "تیکت ها";
+}
+<div class="container" style="padding:130px">
+    <div class="panel-group">
+        <a class="btn btn-default" asp-action="Create">ثبت تیکت جدید</a>
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">@item.Title</div>
+                <div class="panel-body">
+                    دسته بندی:  @item.CategoryTitle
+                    @foreach (var msg in item.TicketMessages)
+                    {
+                        <hr />
+
+                        <div>
+                            <span>@msg.CreateAt </span>
+                            <span>@msg.Message</span>
+                            @if (!string.IsNullOrEmpty(msg.File))
+                            {
+                                <br/>
+                                <a href="@Url.Content(@msg.File)">فایل</a>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="panel-footer">@item.CreateAtPersian</div>
+            </div>
+            <hr />
+        }
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@model WebApp.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "عضویت";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+
+<form class="form-signin" asp-action="Register" asp-route-ReturnUrl="@ViewData["ReturnUrl"]">
+    <h2 class="form-signin-heading">ثبتنام در مدیریت مشریان</h2>
+    <div class="login-wrap">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" autofocus />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" autofocus />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" autofocus />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ConfirmPassword" class="control-label"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="ورود" class=" btn btn-lg btn-login btn-block" />
+        </div>
+
+        <p><a asp-action="#"><small>رمزتان را فراموش کرده اید؟</small></a></p>
+        <p class="text-muted text-center">
+            <a asp-action="login" class="btn btn-sm btn-white btn-block">ورود حساب کاربری</a>
+        </p>
+    </div>
+</form>

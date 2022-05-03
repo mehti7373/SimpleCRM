@@ -1,0 +1,66 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebApp.Areas.Admin.Models.TicketIndexViewModel>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@{
+    ViewData["Title"] = "تیکت ها";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box">
+    <h3>@ViewBag.Title</h3>
+    <nav>
+        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+    </nav>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th width="15%">
+                    @Html.SortableHeaderFor(model => model.Title)
+                </th>
+
+                <th width="15%">
+                    @Html.SortableHeaderFor(model => model.CategoryTitle)
+                </th>
+
+                <th width="15%">
+                    @Html.SortableHeaderFor(model => model.CreateAt)
+                </th>
+                <th width="15%">
+                    @Html.SortableHeaderFor(model => model.IsDone)
+                </th>
+
+                <th width="25%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryTitle)
+                </td>
+                <td>
+                    @item.CreateAt.ToPersianDateString(includeHourMinute: true)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDone)
+                </td>
+
+
+                <td>
+
+                    <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.Id">مشاهده</a>
+
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+

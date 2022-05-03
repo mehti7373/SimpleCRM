@@ -1,0 +1,71 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<WebApp.Areas.Admin.Models.UserIndexViewModel>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="box">
+    <h3>@ViewBag.Title</h3>
+    <a class="btn btn-success pull-left" asp-action="Create">ثبت جدید</a>
+
+    <nav>
+        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+    </nav>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th width="15%">
+                    @Html.SortableHeaderFor(model => model.Email)
+                </th>
+
+                <th width="15%">
+                    @Html.SortableHeaderFor(model => model.CreateAt)
+                </th>
+                @*@if (User.FindFirst("role").Value == "Admin")
+                                {
+                    <th>
+                        @Html.SortableHeaderFor(model => model.Password)
+                    </th>            }*@
+                <th width="15%">
+                    @Html.SortableHeaderFor(model => model.Role)
+                </th>
+                <th width="25%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    <td>
+                        @item.CreateAt.ToPersianDateString(includeHourMinute: true)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    @*@if (User.FindFirst("role").Value == "Admin")
+                            {
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </th>
+                            }*@
+
+                    <td>
+
+                        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">ویرایش</a>
+                        <a asp-action="ChangePassword" class="btn btn-warning" asp-route-id="@item.Id">تغییر پسورد</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
